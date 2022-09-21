@@ -1,14 +1,25 @@
 {
-    "name": "lambda-from-scratch",
+    "name": "lambda-cognito-mysql-base",
     "description": "Start from scratch starter project",
     "version": "0.0.1",
     "private": true,
     "dependencies": {
+        "auto-bind": "^2.1.0",
+        "aws-sdk": "^2.660.0",
+        "mysql2": "^2.3.3",
+        "sequelize": "^6.23.0"
     },
     "devDependencies": {
-        "jest": "^25.4.0"
+        "eslint-plugin-prettier": "^4.2.1",
+        "jest": "^25.4.0",
+        "prettier": "2.7.1",
+        "prettier-eslint": "^15.0.1"
     },
     "scripts": {
-        "test": "jest"
+        "test": "jest",
+        "format:check": "prettier --check .",
+        "format:write": "prettier --write .",
+        "lint:check": "eslint .",
+        "lint:fix": "eslint --fix ."
     }
 }
