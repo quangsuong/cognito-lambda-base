@@ -1,13 +1,20 @@
 /**
  * A Lambda function that returns a string.
  */
-exports.helloFromLambdaHandler = async () => {
-    // If you change this message, you will need to adjust tests in hello-from-lambda.test.js
-    const message = 'Hello from Lambda!';
+exports.helloFromLambdaHandler = async (event, context, callback) => {
+    const { httpMethod, path } = event;
+    if (httpMethod !== 'GET') {
+        throw new Error(`getAllItems only accept GET method, you tried: ${httpMethod}`);
+    }
+    console.log(event); // Contains incoming request data (e.g., query params, headers and more)
 
-    // All log statements are written to CloudWatch by default. For more information, see
-    // https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-logging.html
-    console.log(message);
-
-    return message;
+    const response = {
+        statusCode: 200,
+        headers: {
+            'x-custom-header': 'My Header Value',
+        },
+        body: JSON.stringify({ message: event,
+            context: context}),
+    };
+    callback(null, response);
 };

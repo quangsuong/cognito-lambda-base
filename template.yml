@@ -24,19 +24,51 @@ Globals:
 Parameters:
   AppId:
     Type: String
-
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
 Resources:
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-
   # This is a Lambda function config associated with the source code: hello-from-lambda.js
   helloFromLambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
       Handler: src/handlers/hello-from-lambda.helloFromLambdaHandler
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 60
+      Description: A Lambda function that returns a static string.
+      Policies:
+        # Give Lambda basic execution Permission to the helloFromLambda
+        - AWSLambdaBasicExecutionRole
+      Events:
+        GET:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: GET
+            RestApiId:
+              Ref: MyApiGateway
+              Auth:
+                Authorizer: MyCognitoAuth
+  postConfirmationTrigger:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/sign-up-lambda.postConfirmationTrigger
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 60
+      Description: A Lambda function that returns a static string.
+      Policies:
+        # Give Lambda basic execution Permission to the helloFromLambda
+        - AWSLambdaBasicExecutionRole
+  getUserInfoLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/user-lambda.getUserInfoLambdaHandler
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 60
