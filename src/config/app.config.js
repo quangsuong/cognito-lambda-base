@@ -10,10 +10,10 @@ const appConfig = Object.freeze({
         salt: process.env.ENCRYPTION_SALT || '',
     },
     db: {
-        host: process.env.DB_HOST || 'lambda.cqu8umnjvhry.ap-southeast-1.rds.amazonaws.com',
+        host: process.env.DB_HOST || 'cognito-base.cqu8umnjvhry.ap-southeast-1.rds.amazonaws.com',
         database: process.env.DB_DATABASE || 'lambda',
         user: process.env.DB_USER || 'admin',
-        password: process.env.DB_PASSWORD || 'zVDcuTIAjyVOYma',
+        password: process.env.DB_PASSWORD || 'kRLoyAIBX7mdz9S60EBv',
     },
 });
 

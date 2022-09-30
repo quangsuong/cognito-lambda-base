@@ -9,12 +9,12 @@ class BaseController {
 
     ok(callback, data) {
         const response = responseBuilder.build(HttpCode.OK, data);
-        callback(null, response)
+        callback(null, response);
     }
 
     error(callback, message, httpCode = HttpCode.InternalServerError) {
         const response = responseBuilder.build(httpCode, message);
-        callback(null, response)
+        callback(null, response);
     }
 }
 module.exports = BaseController;

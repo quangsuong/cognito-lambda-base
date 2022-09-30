@@ -1,6 +1,7 @@
 // Import all functions from hello-from-lambda.js
-const lambda = require('../../../src/handlers/hello-from-lambda.js');
+const userLambda = require('../../../src/handlers/user-lambda.js');
 
+// eslint-disable-next-line no-undef
 describe('Test for hello-from-lambda', () => {
     // This test invokes the hello-from-lambda Lambda function and compares the result
     it('Verifies successful response', async () => {

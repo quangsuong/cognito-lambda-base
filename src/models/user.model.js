@@ -11,12 +11,25 @@ class User extends BaseModel {
                 unique: true,
                 primaryKey: true,
             },
-            verified: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false,
+            email: {
+                type: DataTypes.STRING(1000),
+            },
+            id_token: {
+                type: DataTypes.STRING(2000),
+            },
+            refresh_token: {
+                type: DataTypes.STRING(2000),
+            },
+            access_token: {
+                type: DataTypes.STRING(2000),
             },
         };
     }
 }
 
-module.exports = new User().instance();
+const user = new User().instance();
+(async () => {
+    await user.sync({alter: true});
+})();
+
+module.exports = user;

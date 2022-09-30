@@ -14,16 +14,6 @@ const ErrorCode = Object.freeze({
     None: 0,
     DataNotFound: 1,
 
-    //Auth: 100 - 199
-    UsernameOrPasswordIsIncorrect: 100,
-    TokenIsInvalid: 101,
-    TokenIsExpired: 102,
-    Unauthorized: 103,
-    NotChangePassword: 104,
-    AppIdOrAppSecretIsIncorrect: 105,
-    UnauthorizedOrg: 106,
-    OldPasswordNotCorrect: 107,
-
     //User: 200-299
     UserIsNotFound: 200,
     CannotChangeStatus: 201,
