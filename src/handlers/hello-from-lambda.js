@@ -2,7 +2,7 @@
  * A Lambda function that returns a string.
  */
 exports.helloFromLambdaHandler = async (event, context, callback) => {
-    const { httpMethod, path } = event;
+    const {httpMethod, path} = event;
     if (httpMethod !== 'GET') {
         throw new Error(`getAllItems only accept GET method, you tried: ${httpMethod}`);
     }
@@ -13,8 +13,7 @@ exports.helloFromLambdaHandler = async (event, context, callback) => {
         headers: {
             'x-custom-header': 'My Header Value',
         },
-        body: JSON.stringify({ message: event,
-            context: context}),
+        body: JSON.stringify({message: event, context: context}),
     };
     callback(null, response);
 };

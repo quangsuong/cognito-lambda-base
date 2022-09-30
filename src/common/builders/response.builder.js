@@ -37,31 +37,36 @@ function getKeyByValue(object, value) {
 }
 
 function getErrorResponse(httpCode, data) {
-    let statusCode = httpCode
-    const res = {
-        success: false,
+    const response = {
+        errorCode: httpCode ? httpCode : HttpCode.InternalServerError,
     };
 
     if (data) {
-        statusCode = getErrorCode(data)
-        res.errorCode = getErrorCode(data);
-        res.errorMessage = res.errorCode
-            ? getErrorMessage(res.errorCode)
-            : getMessageFromCode(HttpCode.InternalServerError);
+        response.errorMessage = data
+            ? data
+            : getMessageFromCode(response.errorCode);
     } else {
-        res.errorMessage = getMessageFromCode(httpCode);
+        response.errorMessage = getMessageFromCode(httpCode);
     }
 
     return {
-        'statusCode': statusCode,
-        body: JSON.stringify(res)
+        statusCode: response.errorCode,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(response),
+        isBase64Encoded: false,
     };
 }
 
 function getSuccessResponse(data) {
     return {
         statusCode: HttpCode.OK,
-        body: JSON.stringify(data)
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        isBase64Encoded: false,
     };
 }
 
