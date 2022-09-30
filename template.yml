@@ -52,6 +52,78 @@ Resources:
               Ref: MyApiGateway
               Auth:
                 Authorizer: MyCognitoAuth
+  signUpLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/user-lambda.signUpLambdaHandler
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 60
+      Description: Sign Up.
+      Policies:
+        # Give Lambda basic execution Permission to the helloFromLambda
+        - AWSLambdaBasicExecutionRole
+      Events:
+        GET:
+          Type: Api
+          Properties:
+            Path: /sign-up
+            Method: POST
+  confirmRegistrationLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/user-lambda.confirmRegistrationLambdaHandler
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 60
+      Description: confirm reg.
+      Policies:
+        # Give Lambda basic execution Permission to the helloFromLambda
+        - AWSLambdaBasicExecutionRole
+      Events:
+        GET:
+          Type: Api
+          Properties:
+            Path: /confirm-reg
+            Method: POST
+  resendConfirmationCodeLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/user-lambda.resendConfirmationCodeLambdaHandler
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 60
+      Description: confirm reg.
+      Policies:
+        # Give Lambda basic execution Permission to the helloFromLambda
+        - AWSLambdaBasicExecutionRole
+      Events:
+        GET:
+          Type: Api
+          Properties:
+            Path: /resend-confirmation-code
+            Method: POST
+  loginLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/handlers/user-lambda.loginLambdaHandler
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 60
+      Description: confirm reg.
+      Policies:
+        # Give Lambda basic execution Permission to the helloFromLambda
+        - AWSLambdaBasicExecutionRole
+      Events:
+        GET:
+          Type: Api
+          Properties:
+            Path: /login
+            Method: POST
   postConfirmationTrigger:
     Type: AWS::Serverless::Function
     Properties:

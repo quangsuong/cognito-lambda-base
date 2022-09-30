@@ -8,6 +8,42 @@ class UserController extends BaseController {
         userModel.sync({alter: true});
     }
 
+    async signUp(event, context, callback) {
+        try {
+            callback(null, event);
+        } catch (error) {
+            console.error(error);
+            return this.error(callback, error);
+        }
+    }
+
+    async confirmRegistration(event, context, callback) {
+        try {
+            callback(null, event);
+        } catch (error) {
+            console.error(error);
+            return this.error(callback, error);
+        }
+    }
+
+    async resendConfirmationCode(event, context, callback) {
+        try {
+            callback(null, event);
+        } catch (error) {
+            console.error(error);
+            return this.error(callback, error);
+        }
+    }
+
+    async login(event, context, callback) {
+        try {
+            callback(null, event);
+        } catch (error) {
+            console.error(error);
+            return this.error(callback, error);
+        }
+    }
+
     async createUser(event, context, callback) {
         try {
             callback(null, event);
