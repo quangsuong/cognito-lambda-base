@@ -57,9 +57,9 @@ class Cognito {
         };
         const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
         return new Promise((resolve, reject) => {
-            cognitoUser.refreshSession(RefreshToken, {
-                onFailure: reject,
-                onSuccess: resolve,
+            cognitoUser.refreshSession(RefreshToken, (err, result) => {
+                if (err) return reject(err);
+                resolve(result);
             });
         });
     }
