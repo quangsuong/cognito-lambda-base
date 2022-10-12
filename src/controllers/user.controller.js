@@ -43,10 +43,10 @@ class UserController extends BaseController {
             const body = JSON.parse(event.body);
             const user = await userModel.findOne({
                 where: {
-                    refreshToken: body.refreshToken,
+                    refresh_token: body.refreshToken,
                 },
             });
-            const result = await Cognito.refreshToken(user.refreshToken, user.email);
+            const result = await Cognito.refreshToken(user.refresh_token, user.email);
             const data = {
                 accessToken: result.getAccessToken().getJwtToken(),
                 refreshToken: result.getRefreshToken().getToken(),

@@ -1,7 +1,7 @@
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const poolData = {
-    UserPoolId: 'ap-southeast-1_N7inwdT11', // Your user pool id here
-    ClientId: '4m4rhbfoti4ocbdrt583ghglci', // Your client id here
+    UserPoolId: process.env.USER_POOL_ID, // Your user pool id here
+    ClientId: process.env.CLIENT_ID, // Your client id here
 };
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
@@ -33,12 +33,12 @@ class Cognito {
             Pool: userPool,
         };
         const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-        const season = new AmazonCognitoIdentity.CognitoUserSession({
+        const session = new AmazonCognitoIdentity.CognitoUserSession({
             IdToken: new AmazonCognitoIdentity.CognitoIdToken({IdToken: idToken}),
             AccessToken: new AmazonCognitoIdentity.CognitoAccessToken({AccessToken: accessToken}),
             RefreshToken: new AmazonCognitoIdentity.CognitoRefreshToken({RefreshToken: refreshToken}),
         });
-        cognitoUser.setSignInUserSession(season);
+        cognitoUser.setSignInUserSession(session);
         return new Promise((resolve, reject) => {
             cognitoUser.globalSignOut({
                 onSuccess: resolve,
