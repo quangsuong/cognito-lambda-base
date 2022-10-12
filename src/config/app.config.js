@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 'use strict';
 
 const appConfig = Object.freeze({
