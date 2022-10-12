@@ -17,8 +17,8 @@ class UserController extends BaseController {
                     sub: result.idToken.payload.sub,
                     email: result.idToken.payload.email,
                     id_token: result.getIdToken().getJwtToken(),
-                    refresh_token: result.getAccessToken().getJwtToken(),
-                    access_token: result.getRefreshToken().getToken(),
+                    access_token: result.getAccessToken().getJwtToken(),
+                    refresh_token: result.getRefreshToken().getToken(),
                 },
                 {
                     returning: true,
