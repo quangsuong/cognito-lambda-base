@@ -32,7 +32,22 @@ class UserController extends BaseController {
 
     async logout(event, context, callback) {
         try {
-            this.ok(callback, event);
+            const user = await userModel.findOne({
+                where: {
+                    access_token: event.headers.Authentication,
+                },
+            });
+
+            if (user != null) {
+                await Cognito.logout(user.email, user.id_token, user.access_token, user.refresh_token);
+                const data = {
+                    'success': true
+                }
+                this.ok(callback, data);
+
+                return;
+            }
+            this.error(callback, error.message, HttpCode.NotFound);
         } catch (error) {
             this.error(callback, error.message, HttpCode.NotFound);
         }
