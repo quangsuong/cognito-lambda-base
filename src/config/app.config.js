@@ -1,4 +1,3 @@
-require('dotenv').config();
 'use strict';
 
 const appConfig = Object.freeze({
@@ -6,8 +5,8 @@ const appConfig = Object.freeze({
         stage: process.env.NODE_ENV || 'dev',
     },
     cognito: {
-        userPoolId: process.env.USER_POOL_ID,
-        clientId: process.env.CLIENT_ID,
+        userPoolId: process.env.COGNITO_USER_POOL_ID,
+        clientId: process.env.COGNITO_CLIENT_ID,
     },
     db: {
         host: process.env.DB_HOST,
