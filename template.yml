@@ -20,6 +20,15 @@ Globals:
         # it has to be manually updated when you add resources to your application.
         # More information in https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
         PermissionsBoundary: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/${AppId}-${AWS::Region}-PermissionsBoundary'
+        Environment:
+            Variables:
+                COGNITO_USER_POOL_ID: ap-northeast-1_8Uid6vspw
+                COGNITO_CLIENT_ID: 7nd21b64rg9fllcu3u1d4ec3j0
+                DB_HOST: cognito-base.cqu8umnjvhry.ap-southeast-1.rds.amazonaws.com
+                DB_DATABASE: lambda
+                DB_USER: admin
+                DB_PASSWORD: kRLoyAIBX7mdz9S60EBv
+
 
 Parameters:
     AppId:
