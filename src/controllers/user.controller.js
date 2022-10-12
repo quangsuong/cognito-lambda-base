@@ -65,8 +65,20 @@ class UserController extends BaseController {
             const data = {
                 accessToken: result.getAccessToken().getJwtToken(),
                 refreshToken: result.getRefreshToken().getToken(),
-                exp: result.getAccessToken().getExpiration(),
             };
+
+            await userModel.upsert(
+                {
+                    sub: user.sub,
+                    email: user.email,
+                    id_token: user.id_token,
+                    access_token: result.getAccessToken().getJwtToken(),
+                    refresh_token: result.getRefreshToken().getToken(),
+                },
+                {
+                    returning: true,
+                },
+            );
             this.ok(callback, data);
         } catch (error) {
             this.error(callback, error.message, HttpCode.NotFound);
