@@ -108,3 +108,39 @@ Resources:
                     Properties:
                         Path: /refresh-token
                         Method: POST
+    forgotPasswordLambdaFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ./
+            Handler: src/handlers/user-lambda.forgotPasswordLambdaHandler
+            Runtime: nodejs14.x
+            MemorySize: 128
+            Timeout: 60
+            Description: forgot password.
+            Policies:
+                # Give Lambda basic execution Permission to the helloFromLambda
+                - AWSLambdaBasicExecutionRole
+            Events:
+                Api:
+                    Type: Api
+                    Properties:
+                        Path: /forgot-password
+                        Method: POST
+    confirmPasswordLambdaFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ./
+            Handler: src/handlers/user-lambda.confirmPasswordLambdaHandler
+            Runtime: nodejs14.x
+            MemorySize: 128
+            Timeout: 60
+            Description: confirm password.
+            Policies:
+                # Give Lambda basic execution Permission to the helloFromLambda
+                - AWSLambdaBasicExecutionRole
+            Events:
+                Api:
+                    Type: Api
+                    Properties:
+                        Path: /forgot-password-submit
+                        Method: POST

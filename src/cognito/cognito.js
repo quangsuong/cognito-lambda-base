@@ -63,6 +63,39 @@ class Cognito {
             });
         });
     }
+
+    forgotPassword(username) {
+        const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+        const userData = {
+            Username: username,
+            Pool: userPool,
+        };
+        const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+        return new Promise((resolve, reject) => {
+            cognitoUser.forgotPassword({
+                onSuccess: resolve,
+                onFailure: reject,
+                inputVerificationCode: resolve
+            })
+        });
+    }
+
+    confirmPassword(username, verificationCode, newPassword) {
+        const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+        const userData = {
+            Username: username,
+            Pool: userPool,
+        };
+        const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+        return new Promise((resolve, reject) => {
+            cognitoUser.confirmPassword(verificationCode, newPassword, {
+                onSuccess: resolve,
+                onFailure: reject,
+            })
+        });
+    }
 }
 
 module.exports = new Cognito();

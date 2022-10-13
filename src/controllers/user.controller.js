@@ -84,6 +84,32 @@ class UserController extends BaseController {
             this.error(callback, error.message, HttpCode.NotFound);
         }
     }
+
+    async forgotPassword(event, context, callback) {
+        try {
+            const body = JSON.parse(event.body);
+            await Cognito.forgotPassword(body.username);
+            const data = {
+                'success': true
+            }
+            this.ok(callback, data);
+        } catch (error) {
+            this.error(callback, error.message, HttpCode.InternalServerError);
+        }
+    }
+
+    async confirmPassword(event, context, callback) {
+        try {
+            const body = JSON.parse(event.body);
+            await Cognito.confirmPassword(body.username, body.verificationCode, body.newPassword);
+            const data = {
+                'success': true
+            }
+            this.ok(callback, data);
+        } catch (error) {
+            this.error(callback, error.message, HttpCode.InternalServerError);
+        }
+    }
 }
 
 module.exports = new UserController();

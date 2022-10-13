@@ -9,3 +9,9 @@ exports.logoutLambdaHandler = async (event, context, callback) => {
 exports.refreshTokenLambdaHandler = async (event, context, callback) => {
     await userController.refreshToken(event, context, callback);
 };
+exports.forgotPasswordLambdaHandler = async (event, context, callback) => {
+    await userController.forgotPassword(event, context, callback);
+};
+exports.confirmPasswordLambdaHandler = async (event, context, callback) => {
+    await userController.confirmPassword(event, context, callback);
+};
