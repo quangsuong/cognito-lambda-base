@@ -6,6 +6,7 @@ const HttpCode = Object.freeze({
     Unauthorized: 401,
     Forbidden: 403,
     NotFound: 404,
+    LimitExceeded: 429,
     InternalServerError: 500,
     ServiceUnavailable: 503,
 });

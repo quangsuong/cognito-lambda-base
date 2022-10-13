@@ -107,6 +107,11 @@ class UserController extends BaseController {
             }
             this.ok(callback, data);
         } catch (error) {
+            if (error.code) {
+                this.error(callback, error.code, HttpCode.LimitExceeded);
+
+                return;
+            }
             this.error(callback, error.message, HttpCode.InternalServerError);
         }
     }
@@ -120,8 +125,13 @@ class UserController extends BaseController {
                 'success': true
             }
             this.ok(callback, data);
-        } catch (e) {
-            this.error(callback, error.message, HttpCode.Unauthorized);
+        } catch (error) {
+            if (error.code) {
+                this.error(callback, error.code, HttpCode.LimitExceeded);
+
+                return;
+            }
+            this.error(callback, error.message, HttpCode.InternalServerError);
         }
     }
 }

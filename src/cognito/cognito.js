@@ -118,7 +118,10 @@ class Cognito {
                         resolve(result);
                     })
                 },
-                onFailure: reject
+                onFailure: (err, result) => {
+                    if (err) return reject(err);
+                    resolve(result);
+                }
             });
         });
     }
