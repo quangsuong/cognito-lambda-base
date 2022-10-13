@@ -15,3 +15,6 @@ exports.forgotPasswordLambdaHandler = async (event, context, callback) => {
 exports.confirmPasswordLambdaHandler = async (event, context, callback) => {
     await userController.confirmPassword(event, context, callback);
 };
+exports.changePasswordLambdaHandler = async (event, context, callback) => {
+    await userController.changePassword(event, context, callback);
+};

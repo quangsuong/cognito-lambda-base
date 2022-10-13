@@ -96,6 +96,32 @@ class Cognito {
             })
         });
     }
+
+    changePassword(username, oldPassword, newPassword) {
+        const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+        const userData = {
+            Username: username,
+            Pool: userPool,
+        };
+        const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+        const authenticationData = {
+            Username: username,
+            Password: oldPassword,
+        };
+        const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+
+        return new Promise((resolve, reject) => {
+            cognitoUser.authenticateUser(authenticationDetails, {
+                onSuccess: () => {
+                    cognitoUser.changePassword(oldPassword, newPassword, (err, result) => {
+                        if (err) return reject(err);
+                        resolve(result);
+                    })
+                },
+                onFailure: reject
+            });
+        });
+    }
 }
 
 module.exports = new Cognito();

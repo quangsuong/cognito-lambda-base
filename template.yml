@@ -144,3 +144,21 @@ Resources:
                     Properties:
                         Path: /confirm-password
                         Method: POST
+    changePasswordLambdaFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ./
+            Handler: src/handlers/user-lambda.changePasswordLambdaHandler
+            Runtime: nodejs14.x
+            MemorySize: 128
+            Timeout: 60
+            Description: change password.
+            Policies:
+                # Give Lambda basic execution Permission to the helloFromLambda
+                - AWSLambdaBasicExecutionRole
+            Events:
+                Api:
+                    Type: Api
+                    Properties:
+                        Path: /change-password
+                        Method: POST
