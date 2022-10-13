@@ -41,13 +41,13 @@ class UserController extends BaseController {
             if (user != null) {
                 await Cognito.logout(user.email, user.id_token, user.access_token, user.refresh_token);
                 const data = {
-                    'success': true
-                }
+                    success: true,
+                };
                 this.ok(callback, data);
 
                 return;
             }
-            this.error(callback, error.message, HttpCode.NotFound);
+            this.error(callback, 'User not found', HttpCode.NotFound);
         } catch (error) {
             this.error(callback, error.message, HttpCode.NotFound);
         }
@@ -90,8 +90,8 @@ class UserController extends BaseController {
             const body = JSON.parse(event.body);
             await Cognito.forgotPassword(body.username);
             const data = {
-                'success': true
-            }
+                success: true,
+            };
             this.ok(callback, data);
         } catch (error) {
             this.error(callback, error.message, HttpCode.InternalServerError);
@@ -103,8 +103,8 @@ class UserController extends BaseController {
             const body = JSON.parse(event.body);
             await Cognito.confirmPassword(body.username, body.verificationCode, body.newPassword);
             const data = {
-                'success': true
-            }
+                success: true,
+            };
             this.ok(callback, data);
         } catch (error) {
             this.error(callback, error.message, HttpCode.InternalServerError);
@@ -117,8 +117,8 @@ class UserController extends BaseController {
 
             await Cognito.changePassword(body.username, body.oldPassword, body.newPassword);
             const data = {
-                'success': true
-            }
+                success: true,
+            };
             this.ok(callback, data);
         } catch (error) {
             this.error(callback, error.message, HttpCode.InternalServerError);

@@ -29,7 +29,6 @@ Globals:
                 DB_USER: admin
                 DB_PASSWORD: bardow-5wudjy-Cucter
 
-
 Parameters:
     AppId:
         Type: String

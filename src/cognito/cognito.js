@@ -76,8 +76,8 @@ class Cognito {
             cognitoUser.forgotPassword({
                 onSuccess: resolve,
                 onFailure: reject,
-                inputVerificationCode: resolve
-            })
+                inputVerificationCode: resolve,
+            });
         });
     }
 
@@ -93,7 +93,7 @@ class Cognito {
             cognitoUser.confirmPassword(verificationCode, newPassword, {
                 onSuccess: resolve,
                 onFailure: reject,
-            })
+            });
         });
     }
 
@@ -116,12 +116,12 @@ class Cognito {
                     cognitoUser.changePassword(oldPassword, newPassword, (err, result) => {
                         if (err) return reject(err);
                         resolve(result);
-                    })
+                    });
                 },
                 onFailure: (err, result) => {
                     if (err) return reject(err);
                     resolve(result);
-                }
+                },
             });
         });
     }

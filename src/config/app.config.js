@@ -1,5 +1,5 @@
-// require('dotenv').config();  // uncomment this line for local test
-'use strict';
+// require('dotenv').config(); // uncomment this line for local test
+('use strict');
 
 const appConfig = Object.freeze({
     env: {
